@@ -12,14 +12,10 @@
 
 function bubbleSort(nums) {
   // code goes here
-  for(let i = 0; i < nums.length - 1; i++) {
-    let earlier = nums[i];
-    let later = nums[nums.length - 1 - i];
-    if(earlier > later) {
-      nums[i] = later;
-      nums[nums.length - 1 - i] = earlier;
-    }
+  for(let i = 0; i < nums.length-1; i++) {
+    
   }
+  return nums;
 }
 
 // unit tests
