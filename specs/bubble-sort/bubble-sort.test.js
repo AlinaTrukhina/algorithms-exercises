@@ -25,9 +25,9 @@ function bubbleSort(nums) {
             nums[i + 1] = earlier;
             swaps++;
           }
-          console.log("i is ", i);
-          console.log(swaps);
-          console.log(nums);
+          // console.log("i is ", i);
+          // console.log(swaps);
+          // console.log(nums);
         }
   }
   return nums;
