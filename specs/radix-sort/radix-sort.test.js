@@ -12,11 +12,16 @@
 // number = 1391, place = 1, longestNumber = 4
 // returns 1
 
-function getDigit(number, place, longestNum10) {
-  let truncatedNum = Math.floor(number / place);
-  let decimalNum = (truncatedNum / (10)) - Math.floor(truncatedNum / (10));
-  decimalNum = Math.round(decimalNum*10);
-  return decimalNum;
+function getDigit(number, place, longestNumber) {
+  // let truncatedNum = Math.floor(number / place);
+  // let decimalNum = (truncatedNum / (10)) - Math.floor(truncatedNum / (10));
+  // decimalNum = Math.round(decimalNum*10);
+  const string = number.toString();
+  const size = string.length;
+
+  const mod = longestNumber - size;
+
+  return string[place - mod] ||  0;
 }
 
 function getLongestNumber(nums) {
@@ -30,7 +35,7 @@ function getLongestNumber(nums) {
   // for(let i = 1; i < longestNumber; i++){
   //     longestNum10 = longestNum10 * 10;
   // }
-  return longestNum10;
+  return longestNumber;
 }
 
 function radixSort(array) {
@@ -38,28 +43,36 @@ function radixSort(array) {
   const longestNumber = getLongestNumber(array);
   // create how many buckets you need
   // array of 10 arrays
-  const buckets = new Array(10).fill().map(() => []);
-  // for (let n = 0; n < 10; n++){
-  //   newArray.push(Array());
-  // }
+  //const buckets = new Array(10).fill().map(() => []);
+  const buckets = [];
+  for (let n = 0; n < 10; n++){
+    buckets.push(Array());
+  }
   // for loop for how many iterations you need to do
   for (let i = longestNumber - 1; i >= 0; i--){
     // while loop
     // enqueue the numbers into their buckets
     while(array.length){
-      const digit = array.shift();
-      buckets[getDigit(digit, i, longestNumber)].push(digit);
-      //newArray[digit].push();
+      const current = array.shift();
+      buckets[getDigit(current, i, longestNumber)].push(current);
+    }
+
+    // for loop for each bucket
+    // dequeue all of the items into array
+    for(let j = 0; j < 10; j++) {
+      while(buckets[j].length) {
+        array.push(buckets[j].shift());
+      }
     }
   }
-    // for loop for each bucket
-    // dequeue all of the items into a bucket
+
+  return array;
 
 }
 
 // unit tests
 // do not modify the below code
-describe.skip("radix sort", function () {
+describe("radix sort", function () {
   it("should sort correctly", () => {
     const nums = [
       20,
