@@ -9,8 +9,52 @@
 
 */
 
+// number = 1391, place = 1, longestNumber = 4
+// returns 1
+
+function getDigit(number, place, longestNum10) {
+  let truncatedNum = Math.floor(number / place);
+  let decimalNum = (truncatedNum / (10)) - Math.floor(truncatedNum / (10));
+  decimalNum = Math.round(decimalNum*10);
+  return decimalNum;
+}
+
+function getLongestNumber(nums) {
+  longestNumber = 1;
+  for(let n of nums){
+    if( n.toString().length > longestNumber) {
+      longestNumber = n.toString().length
+    }
+  }
+  // longestNum10 = 1;
+  // for(let i = 1; i < longestNumber; i++){
+  //     longestNum10 = longestNum10 * 10;
+  // }
+  return longestNum10;
+}
+
 function radixSort(array) {
-  // code goes here
+  // find longest number
+  const longestNumber = getLongestNumber(array);
+  // create how many buckets you need
+  // array of 10 arrays
+  const buckets = new Array(10).fill().map(() => []);
+  // for (let n = 0; n < 10; n++){
+  //   newArray.push(Array());
+  // }
+  // for loop for how many iterations you need to do
+  for (let i = longestNumber - 1; i >= 0; i--){
+    // while loop
+    // enqueue the numbers into their buckets
+    while(array.length){
+      const digit = array.shift();
+      buckets[getDigit(digit, i, longestNumber)].push(digit);
+      //newArray[digit].push();
+    }
+  }
+    // for loop for each bucket
+    // dequeue all of the items into a bucket
+
 }
 
 // unit tests
