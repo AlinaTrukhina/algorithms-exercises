@@ -19,6 +19,7 @@
 
 class ArrayList {
   // code goes here
+  
 }
 
 // unit tests
